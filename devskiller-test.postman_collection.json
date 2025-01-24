@@ -12,7 +12,34 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"/** write your tests here */"
+							"//Código de status deve ser 200",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//Propriedade idade existe no ResponseBody",
+							"pm.test(\"Response contains 'idade'\", function () {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson).to.have.property(\"idade\");",
+							"});",
+							"",
+							"//Campo sexo é igual a Masculino",
+							"pm.test(\"Field 'sexo' is 'Masculino'\", function () {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.sexo).to.eql(\"Masculino\");",
+							"});",
+							"",
+							"//Guardar o numero na variável de ambiente NUMERO",
+							"pm.test(\"Save 'numero' to environment variable\", function () {",
+							"    const responseJson = pm.response.json();",
+							"    pm.environment.set(\"NUMERO\", responseJson.numero);",
+							"    pm.expect(responseJson).to.have.property(\"numero\");",
+							"});",
+							"",
+							"//Tempo de resposta é aceitável -1 segundo)",
+							"pm.test(\"Response time is acceptable\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
