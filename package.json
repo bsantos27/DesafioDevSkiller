@@ -8,6 +8,6 @@
       "postman-collection": "^4.2.1"
    },
    "scripts": {
-      "test": "rm -f *test-results.xml && node execute.js"
+      "test": "del -f *test-results.xml && node execute.js"
    }
 }
